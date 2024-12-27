@@ -36,6 +36,10 @@ public class Author {
         return books;
     }
 
+    public String getBookTitles() {
+        return books.stream().map(Book::getTitle).reduce((a, b) -> a + ", " + b).orElse("");
+    }
+
     public void setBooks(Set<Book> books) {
         this.books = books;
     }

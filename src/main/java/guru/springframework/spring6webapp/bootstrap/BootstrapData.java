@@ -35,8 +35,10 @@ public class BootstrapData implements CommandLineRunner {
 
         Author rod = new Author("Rod", "Johnson");
         Book noEJB = new Book("J2EE Development without EJB", "3939459459");
-        rod.getBooks().add(noEJB);
+        Book j2ee = new Book("J2EE Design and Development", "9780764543852");
+        rod.getBooks().addAll(List.of(noEJB, j2ee));
         noEJB.getAuthors().add(rod);
+        j2ee.getAuthors().add(rod);
 
         Publisher publisher = new Publisher();
         publisher.setName("SFG Publishing");
@@ -46,11 +48,12 @@ public class BootstrapData implements CommandLineRunner {
 
         ddd.setPublisher(publisher);
         noEJB.setPublisher(publisher);
+        j2ee.setPublisher(publisher);
 
         Iterable<Author> authors = List.of(eric, rod);
         authorRepository.saveAll(authors);
 
-        Iterable<Book> books = List.of(ddd, noEJB);
+        Iterable<Book> books = List.of(ddd, noEJB, j2ee);
         bookRepository.saveAll(books);
 
         System.out.println("Authors: " + authorRepository.count());
