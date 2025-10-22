@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.1</version>
+		<version>3.4.10</version>
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
@@ -26,6 +26,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>gg.jte</groupId>
+			<artifactId>jte-spring-boot-starter-3</artifactId>
+			<version>3.1.16</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -38,14 +47,30 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>gg.jte</groupId>
+				<artifactId>jte-maven-plugin</artifactId>
+				<version>3.1.16</version>
+				<executions>
+					<execution>
+						<id>jte-generate</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.basedir}/src/main/jte</sourceDirectory>
+							<contentType>Html</contentType>
+							<binaryStaticContent>true</binaryStaticContent>
+							<targetResourceDirectory>${project.build.outputDirectory}</targetResourceDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
