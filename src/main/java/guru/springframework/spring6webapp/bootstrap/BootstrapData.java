@@ -26,6 +26,7 @@ public class BootstrapData implements CommandLineRunner {
         this.publisherRepository = publisherRepository;
     }
     
+    @SuppressWarnings("null")
     @Override
     public void run(String... args) throws Exception  {
         Author eric = new Author("Eric", "Evans");
@@ -57,7 +58,13 @@ public class BootstrapData implements CommandLineRunner {
         bookRepository.saveAll(books);
 
         System.out.println("Authors: " + authorRepository.count());
+        authorRepository.findAll().forEach(author -> {
+            System.out.println("Author: " + author);
+        });
         System.out.println("Books: " + bookRepository.count());
+        bookRepository.findAll().forEach(book -> {
+            System.out.println("Book: " + book);
+        });
         System.out.println("Publishers: " + publisherRepository.count());
     }
 }
